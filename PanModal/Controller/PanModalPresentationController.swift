@@ -666,6 +666,9 @@ private extension PanModalPresentationController {
          and apply percentage to backgroundView alpha
          */
         backgroundView.dimState = .percent(1.0 - (yDisplacementFromShortForm / presentedView.frame.height))
+        
+        let newHeight = presentedView.bounds.height - yPos
+        presentable?.panModalHeightChanged(to: newHeight)
     }
 
     /**
