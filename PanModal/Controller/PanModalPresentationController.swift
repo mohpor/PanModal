@@ -654,6 +654,9 @@ private extension PanModalPresentationController {
     func adjust(toYPosition yPos: CGFloat) {
         presentedView.frame.origin.y = max(yPos, anchoredYPosition)
         
+        let newHeight = presentedView.bounds.height - yPos
+        presentable?.panModalHeightChanged(to: newHeight)
+        
         guard presentedView.frame.origin.y > shortFormYPosition else {
             backgroundView.dimState = .max
             return
@@ -666,9 +669,7 @@ private extension PanModalPresentationController {
          and apply percentage to backgroundView alpha
          */
         backgroundView.dimState = .percent(1.0 - (yDisplacementFromShortForm / presentedView.frame.height))
-        
-        let newHeight = presentedView.bounds.height - yPos
-        presentable?.panModalHeightChanged(to: newHeight)
+                
     }
 
     /**
